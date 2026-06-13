@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KTV 點歌系統</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- 自訂標題列 -->
+<div class="titlebar" id="titlebar">
+  <div class="titlebar-drag">
+    <span class="titlebar-icon">🎤</span>
+    <span class="titlebar-title">KTV 點歌系統</span>
+  </div>
+  <div class="titlebar-controls">
+    <button class="tb-btn" id="btn-min" title="最小化">─</button>
+    <button class="tb-btn" id="btn-max" title="最大化">□</button>
+    <button class="tb-btn danger" id="btn-close" title="關閉">✕</button>
+  </div>
+</div>
+
+<div class="app">
+  <!-- 左側：歌曲列表 -->
+  <div class="sidebar">
+    <div class="sidebar-top">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-box" placeholder="搜尋歌名、歌手..." autocomplete="off">
+      </div>
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-lang="all">全部</button>
+        <button class="tab" data-lang="mandarin">華語</button>
+        <button class="tab" data-lang="taiwanese">台語</button>
+        <button class="tab" data-lang="japanese">日語</button>
+        <button class="tab" data-lang="english">英語</button>
+      </div>
+    </div>
+    <div class="song-list" id="song-list"></div>
+    <div class="import-bar">
+      <button class="import-btn" id="import-btn">＋ 匯入本地音樂</button>
+    </div>
+  </div>
+
+  <!-- 中央：播放 + 歌詞 -->
+  <div class="center">
+    <div class="lyrics-area" id="lyrics-area">
+      <div class="lyrics-title" id="lyrics-song-title">月亮代表我的心</div>
+      <div class="lyrics-artist" id="lyrics-artist">鄧麗君</div>
+      <div class="lyrics-lines" id="lyrics-lines">
+        <div class="lyric-line active">你問我愛你有多深</div>
+        <div class="lyric-line">我愛你有幾分</div>
+        <div class="lyric-line">我的情也真</div>
+        <div class="lyric-line">我的愛也真</div>
+        <div class="lyric-line">月亮代表我的心</div>
+        <div class="lyric-line">你問我愛你有多深</div>
+        <div class="lyric-line">我愛你有幾分</div>
+        <div class="lyric-line">你去想一想</div>
+        <div class="lyric-line">你去看一看</div>
+        <div class="lyric-line">月亮代表我的心</div>
+        <div class="lyric-line">輕輕的一個吻</div>
+        <div class="lyric-line">已經打動我的心</div>
+        <div class="lyric-line">深深的一段情</div>
+        <div class="lyric-line">教我思念到如今</div>
+        <div class="lyric-line">你問我愛你有多深</div>
+        <div class="lyric-line">我愛你有幾分</div>
+        <div class="lyric-line">你去想一想</div>
+        <div class="lyric-line">你去看一看</div>
+        <div class="lyric-line">月亮代表我的心</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <div class="now-playing-info">
+        <div class="song-title" id="np-title">月亮代表我的心</div>
+        <div class="song-artist" id="np-artist">鄧麗君</div>
+      </div>
+
+      <div class="progress-wrap">
+        <span class="time" id="cur-time">00:00</span>
+        <div class="progress-bar" id="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+          <div class="progress-thumb" id="progress-thumb"></div>
+        </div>
+        <span class="time" id="tot-time">03:52</span>
+      </div>
+
+      <div class="controls-row">
+        <div class="vol-group">
+          <span class="vol-icon">🔊</span>
+          <input type="range" id="vol-slider" min="0" max="100" value="80" class="vol-slider">
+          <span class="vol-val" id="vol-val">80</span>
+        </div>
+
+        <div class="main-controls">
+          <button class="ctrl-btn" id="btn-prev" title="上一首">⏮</button>
+          <button class="ctrl-btn play-btn" id="btn-play" title="播放/暫停">⏸</button>
+          <button class="ctrl-btn" id="btn-next" title="下一首">⏭</button>
+        </div>
+
+        <div class="right-controls">
+          <button class="ctrl-btn sm" id="btn-stop" title="停止">⏹</button>
+          <button class="ctrl-btn sm" id="btn-shuffle" title="隨機播放">🔀</button>
+          <button class="ctrl-btn sm" id="btn-repeat" title="循環">🔁</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右側：點歌佇列 -->
+  <div class="queue-panel">
+    <div class="queue-header">
+      <span class="queue-title">📋 點歌佇列</span>
+      <button class="clear-btn" id="clear-queue">清除</button>
+    </div>
+    <div class="queue-list" id="queue-list">
+      <div class="queue-empty">尚未點唱任何歌曲<br><small>從左側點擊加入</small></div>
+    </div>
+    <div class="queue-footer">
+      <span id="queue-count-label">共 0 首</span>
+    </div>
+  </div>
+</div>
+
+<audio id="audio-player"></audio>
+
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
